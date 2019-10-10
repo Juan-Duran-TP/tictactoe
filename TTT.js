@@ -138,7 +138,7 @@ for (let i = 0; i < 9; i++){
     cell = document.getElementById(i.toString());
     cell.style.cursor = 'pointer';
     cell.onclick = function() {
-        if (board.isGameOver()){
+        if (board.isGameOver() || turn > 9){
             Swal.fire({
                 type: 'error',
                 title: "The game is over! You can't change any of these spaces!",
