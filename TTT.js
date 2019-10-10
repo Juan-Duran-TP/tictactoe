@@ -119,7 +119,12 @@ class Board extends Array{
         return this.winner;
     }
 
+
+
+
 }
+  
+
 
 
 
@@ -134,7 +139,14 @@ for (let i = 0; i < 9; i++){
     cell.style.cursor = 'pointer';
     cell.onclick = function() {
         if (board.isGameOver()){
-            alert("The game is over! You can't change any of these spaces!")
+            Swal.fire({
+                type: 'error',
+                title: "The game is over! You can't change any of these spaces!",
+                animation: true,
+                customClass: {
+                popup: 'animated tada'
+                }
+            });
         }
         else {
             if (this.style.backgroundColor != 'red'){
@@ -157,7 +169,26 @@ for (let i = 0; i < 9; i++){
                     document.getElementById('status').innerHTML = "<p><b><i>Player " + winner +", has won!<i><b></p>"
                     document.getElementById('status').style.color = "purple";
                     document.getElementById('status').style.color = "purple";
-                    alert("The game is over and Player " + winner + " has won!")
+                    Swal.fire({
+                        title: "Player " + winner +" has won!",
+                        animation: true,
+                        customClass: {
+                        popup: 'animated tada'
+                        }
+                    });
+                }
+                else if ( turn === 10){
+                    document.getElementById('status').innerHTML = "<p><b><i>The game has ended in a tie!<i><b></p>"
+                    document.getElementById('status').style.color = "purple";
+                    document.getElementById('status').style.color = "purple";
+                    Swal.fire({
+                        title: 'The game has ended in a tie!',
+                        animation: true,
+                        customClass: {
+                          popup: 'animated tada'
+                        }
+                      });
+                
                 }
             }
         }
