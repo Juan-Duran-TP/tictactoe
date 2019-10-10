@@ -70,3 +70,6 @@ header{
     max-width: 45%;
 }
 
+p.cells{
+    visibility: hidden;
+}

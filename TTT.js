@@ -3,9 +3,10 @@ class Board extends Array{
         super (args);
         this.grid = "";
         this.gameOver = false;
-        this.token1 = "";
-        this.token2 = "";
+        this.token1 = "X";
+        this.token2 = "O";
         this.initialize()
+        this.winner = "";
     }
 
     initialize(){
@@ -60,18 +61,66 @@ class Board extends Array{
     }
 
     print(){
-        console.log(this.grid)
+        console.log(this.grid);
     }
 
     isGameOver(){
-        
+        // check token1
+        if (this.threeInRow(this.token1)){
+            this.winner = this.token1;
+            this.gameOver = true;
+        }
+        else if( this.threeInRow(this.token2)){
+            this.winner = this.token2;
+            this.gameOver = true;
+        }
+
+        if(this.gameOver){
+            console.log("Congratulations to Player",this.winner,"for winning!")
+        }
         return this.gameOver;
+    }
+    
+    threeInRow(token){
+        let win = false;
+        // row check
+        let count = 0;
+        for (let i = 0; i < 3; i++){
+            for(let j = 0; j < 3; j++){
+                if(token === this[i*3+j]) {
+                    count++;
+                }
+            }
+            if (count === 3){
+                win = true;
+            }
+            count = 0;
+            // column check
+            for (let j = 0; j <3; j++){
+                if(token === this[j*3+i]){
+                    count++;
+                }
+            }
+            if (count === 3){
+                win = true;
+            }
+            count = 0;
+        }
+        // diagonal check
+        if ((token === this[0] && token === this[4] && token === this[8] ) || ( token === this[2] && token === this[4] && token === this[6])){
+            win = true;
+        }
+        return win;
     }
 
     restart(){
 
     }
 
+    getWinner(){
+        return this.winner;
+    }
+
 }
 
 
@@ -79,73 +128,87 @@ class Board extends Array{
 //*********************************************************************************************************************** */
 //*********************************************************************************************************************** */
 //*********************************************************************************************************************** */
-
+const board = new Board();
 let turn = 1;
 let something = document.getElementById('1')
 for (let i = 0; i < 9; i++){
     something = document.getElementById(i.toString());
     something.style.cursor = 'pointer';
     something.onclick = function() {
-        if (this.style.backgroundColor != 'red'){
-            this.style.backgroundColor = 'red';
-            if (turn%2 === 0){
-                this.innerHTML = "<p>O</p>"
-                document.getElementById('status').innerHTML = "<p>Player X, it is your turn</p>"
+        if (board.isGameOver()){
+            alert("The game is over! You can't change any of these spaces!")
+        }
+        else {
+            if (this.style.backgroundColor != 'red'){
+                
+                this.style.backgroundColor = 'red';
+                if (turn%2 === 0){
+                    this.innerHTML = "<p>O</p>"
+                    board.place(0,this.id)
+                    document.getElementById('status').innerHTML = "<p>Player X, it is your turn...</p>"
+                }
+                else{
+                    this.innerHTML = "<p>X</p>"
+                    board.place(1,this.id)
+                    document.getElementById('status').innerHTML = "<p>Player O, it is your turn...</p>"
+                }
+                turn++;
+                board.print()
+                if (board.isGameOver()){
+                    document.getElementById('status').innerHTML = "<p>Player " + board.getWinner() +", has won!</p>"
+                    document.getElementById('status').style.color = "purple";
+                    alert("The game is over and Player " + board.getWinner() + " has won!")
+                }
             }
-            else{
-                this.innerHTML = "<p>X</p>"
-                document.getElementById('status').innerHTML = "<p>Player O, it is your turn</p>"
-            }
-            turn++;
         }
     };    
 }
 
-const board = new Board();
-
-let gameStatus = true;
-while (gameStatus){
-    console.log("Welcome to Tic-Tac-Toe!\n Player 1, please select your token:");
-    // get input
-    board.setToken(1,"X");
-    console.log("Welcome to Tic-Tac-Toe!\n Player 2, please select your token:");
-    // get input
-    board.setToken(2,"O");
-    // print rules of TTT
-    let turnCount = 1;
-    let invalid = true;
-    let location = 0;
-    while (!board.isGameOver()){
-
-        board.print()
-        while (invalid){
-            // get player location, R/C numbers (1-3)
-            // do safety checking to confirm numbers is 1/3
-            let row = Math.ceil(Math.random() * 3);
-            let col = Math.ceil(Math.random() * 3);
-            //console.log(row,col)
-            location = board.convertRC2Location(row,col);
-            if (board.isValidSpot(location)){
-                invalid = false;
-            }
-        }
-        invalid = true;
-        if (turnCount%2 === 0){
-            board.place(1,location);
-        }
-        else {
-            board.place(2,location);
-        }
-        if (turnCount === 9){
-            break;
-        }
-        turnCount++;
 
 
+// let gameStatus = true;
+// while (gameStatus){
+//     console.log("Welcome to Tic-Tac-Toe!\n Player 1, please select your token:");
+//     // get input
+//     board.setToken(1,"X");
+//     console.log("Welcome to Tic-Tac-Toe!\n Player 2, please select your token:");
+//     // get input
+//     board.setToken(2,"O");
+//     // print rules of TTT
+//     let turnCount = 1;
+//     let invalid = true;
+//     let location = 0;
+//     while (!board.isGameOver()){
 
-    }
-    board.print()
-    gameStatus = false;
+//         board.print()
+//         while (invalid){
+//             // get player location, R/C numbers (1-3)
+//             // do safety checking to confirm numbers is 1/3
+//             let row = Math.ceil(Math.random() * 3);
+//             let col = Math.ceil(Math.random() * 3);
+//             //console.log(row,col)
+//             location = board.convertRC2Location(row,col);
+//             if (board.isValidSpot(location)){
+//                 invalid = false;
+//             }
+//         }
+//         invalid = true;
+//         if (turnCount%2 === 0){
+//             board.place(1,location);
+//         }
+//         else {
+//             board.place(2,location);
+//         }
+//         if (turnCount === 9){
+//             break;
+//         }
+//         turnCount++;
 
-}
+
+
+//     }
+//     board.print()
+//     gameStatus = false;
+
+// }
 
