@@ -75,9 +75,6 @@ class Board extends Array{
             this.gameOver = true;
         }
 
-        if(this.gameOver){
-            console.log("Congratulations to Player",this.winner,"for winning!")
-        }
         return this.gameOver;
     }
     
@@ -118,6 +115,7 @@ class Board extends Array{
     }
 
     getWinner(){
+        console.log("Congratulations to Player",this.winner,"for winning!")
         return this.winner;
     }
 
@@ -130,11 +128,11 @@ class Board extends Array{
 //*********************************************************************************************************************** */
 const board = new Board();
 let turn = 1;
-let something = document.getElementById('1')
+let cell = document.getElementById('1')
 for (let i = 0; i < 9; i++){
-    something = document.getElementById(i.toString());
-    something.style.cursor = 'pointer';
-    something.onclick = function() {
+    cell = document.getElementById(i.toString());
+    cell.style.cursor = 'pointer';
+    cell.onclick = function() {
         if (board.isGameOver()){
             alert("The game is over! You can't change any of these spaces!")
         }
@@ -155,9 +153,11 @@ for (let i = 0; i < 9; i++){
                 turn++;
                 board.print()
                 if (board.isGameOver()){
-                    document.getElementById('status').innerHTML = "<p>Player " + board.getWinner() +", has won!</p>"
+                    const winner = board.getWinner();
+                    document.getElementById('status').innerHTML = "<p><b><i>Player " + winner +", has won!<i><b></p>"
                     document.getElementById('status').style.color = "purple";
-                    alert("The game is over and Player " + board.getWinner() + " has won!")
+                    document.getElementById('status').style.color = "purple";
+                    alert("The game is over and Player " + winner + " has won!")
                 }
             }
         }
