@@ -80,6 +80,26 @@ class Board extends Array{
 //*********************************************************************************************************************** */
 //*********************************************************************************************************************** */
 
+let turn = 1;
+let something = document.getElementById('1')
+for (let i = 0; i < 9; i++){
+    something = document.getElementById(i.toString());
+    something.style.cursor = 'pointer';
+    something.onclick = function() {
+        if (this.style.backgroundColor != 'red'){
+            this.style.backgroundColor = 'red';
+            if (turn%2 === 0){
+                this.innerHTML = "<p>O</p>"
+                document.getElementById('status').innerHTML = "<p>Player X, it is your turn</p>"
+            }
+            else{
+                this.innerHTML = "<p>X</p>"
+                document.getElementById('status').innerHTML = "<p>Player O, it is your turn</p>"
+            }
+            turn++;
+        }
+    };    
+}
 
 const board = new Board();
 

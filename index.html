@@ -17,61 +17,77 @@
           Tic-Tac-Toe    
         </h1>
         <h2>
-          <i>Welcome to Juan's Game!</i>
+          <i>Howdy and Welcome to Juan's Game!</i>
         </h2>
       </header>
     </div>
     
     <section class = "board">
       <div class = "columnL">
-        <div class = "cell">
-          <p>X</p>
+        <div id="0" class = "cell">
+          <p></p>
         </div>
-        <div class = "cellC">
-          <p>X</p>
+        <div id="3" class = "cellC">
+          <p></p>
         </div>
-        <div class = "cell">
-          <p>O</p>
+        <div id="6" class = "cell">
+          <p></p>
         </div>
       </div>
       <div class = "columnC">
-        <div class = "cell">
+        <div id="1" class = "cell">
           <p>X</p>
         </div>
-        <div class = "cellC">
+        <div id="4" class = "cellC">
           <p>O</p>
         </div>
-        <div class = "cell">
+        <div id="7" class = "cell">
           <p>X</p>
         </div>
       </div>
       <div class = "columnR">
-        <div class = "cell">
+        <div id="2" class = "cell">
           <p>O</p>
         </div>
-        <div class = "cellC">
+        <div id="5" class = "cellC">
           <p>X</p>
         </div>
-        <div class = "cell">
+        <div id="8" class = "cell">
           <p>X</p>
         </div>
       </div>
 
       <div class= "rules">
         <p>
-          Howdy! These are the rules of the game
-          Each player takes turns placing their icon
-          onto a single box.
-          When there are three boxes with the same icon,
-          either in a row, column, or diagonal, the player
-          who is represented by that icon wins!
+          These are the rules of the game:
+          <ul style="list-style-type:disc;">
+            <li>Each player takes turns placing their icon
+                onto a single box that does not already contain an icon</li>
+            <li>When there are three boxes with the same icon,
+                either in a row, column, or diagonal, the player
+                who is represented by that icon wins!</li>
+          </ul>
         </p>
       </div>
 
+
     </section>
+
+    <div id = "status">
+        <p>
+          Player X, it is your turn...
+        </p>
+    </div>
+
+
 
 
 
     
   </body>
+  <script src="TTT.js">
+
+  </script>
+
+
 </html>

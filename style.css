@@ -57,11 +57,16 @@ section.board{
         box-shadow: inset 0 0 0 3px #3a7999;;
 }
 .rules{
-    max-width: 50%;
+    max-width: 55%;
     float: right;
     text-align: left;
 }
 header{
     text-align: center;
+}
+
+#status{
+    padding-top: 218px;
+    max-width: 45%;
 }
 
