@@ -1,15 +1,15 @@
 class Board extends Array{
     constructor(...args){
         super (args);
+        this.initialize()
+    }
+
+    initialize(){
         this.grid = "";
         this.gameOver = false;
         this.token1 = "X";
         this.token2 = "O";
-        this.initialize()
         this.winner = "";
-    }
-
-    initialize(){
         for (let i = 0; i < 9; i++){
             this[i] = " "
         }
@@ -36,16 +36,14 @@ class Board extends Array{
             return false;
         }
     }
-    place(token, location){       //method name, arguement, body, this is an instance method
-        if (token === 1){
+    place(player, location){       //method name, arguement, body, this is an instance method
+        if (player === 1){
             this[location] = this.token1;
         }
         else{
             this[location] = this.token2;
         }
         this.redraw();
-        // no return results in undefined, return null, return true
-        // fluently one could return this
     }
 
     redraw(){
@@ -194,6 +192,28 @@ for (let i = 0; i < 9; i++){
         }
     };    
 }
+
+let reset = document.getElementById("reset");
+reset.style.cursor = 'pointer';
+reset.onclick = function() {
+    console.log("Game Reset")
+    turn = 1;
+    board.initialize();
+    let cellReset = document.getElementById("0")
+    for (let i = 0; i < 9; i++){
+        
+        cellReset = document.getElementById(i.toString());
+        cellReset.style.backgroundColor = 'turquoise';
+        cellReset.innerHTML = "<p>&nbsp;&nbsp;&nbsp; <p>"
+        document.getElementById('status').innerHTML = "<p>Player X, it is your turn...</p>"
+        document.getElementById('status').style.color = "black";
+        //cellReset.style.visibility = "hidden"
+        //cells[i].style.visibility = 'hidden'
+    }//console.log('worked?')
+};
+
+
+
 
 
 
