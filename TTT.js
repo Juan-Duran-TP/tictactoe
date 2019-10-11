@@ -39,7 +39,7 @@ class Board extends Array{
         }
     }
 
-    placeToken(player, location){       //method name, arguement, body, this is an instance method
+    placeToken(player, location){      
         if (player === 1){
             this[location] = this.token1;
         }
@@ -210,59 +210,5 @@ reset.onclick = function() {
         cellReset.innerHTML = "<p>&nbsp;&nbsp;&nbsp; <p>"
         document.getElementById('status').innerHTML = "<p>Player X, it is your turn...</p>"
         document.getElementById('status').style.color = "black";
-        //cellReset.style.visibility = "hidden"
-        //cells[i].style.visibility = 'hidden'
-    }//console.log('worked?')
+    }
 };
-
-
-
-
-
-
-// let gameStatus = true;
-// while (gameStatus){
-//     console.log("Welcome to Tic-Tac-Toe!\n Player 1, please select your token:");
-//     // get input
-//     board.setToken(1,"X");
-//     console.log("Welcome to Tic-Tac-Toe!\n Player 2, please select your token:");
-//     // get input
-//     board.setToken(2,"O");
-//     // print rules of TTT
-//     let turnCount = 1;
-//     let invalid = true;
-//     let location = 0;
-//     while (!board.isGameOver()){
-
-//         board.print()
-//         while (invalid){
-//             // get player location, R/C numbers (1-3)
-//             // do safety checking to confirm numbers is 1/3
-//             let row = Math.ceil(Math.random() * 3);
-//             let col = Math.ceil(Math.random() * 3);
-//             //console.log(row,col)
-//             location = board.convertRC2Location(row,col);
-//             if (board.isValidSpot(location)){
-//                 invalid = false;
-//             }
-//         }
-//         invalid = true;
-//         if (turnCount%2 === 0){
-//             board.placeToken(1,location);
-//         }
-//         else {
-//             board.placeToken(2,location);
-//         }
-//         if (turnCount === 9){
-//             break;
-//         }
-//         turnCount++;
-
-
-
-//     }
-//     board.print()
-//     gameStatus = false;
-
-// }
-
