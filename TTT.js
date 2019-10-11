@@ -25,9 +25,11 @@ class Board extends Array{
             this.token2 = token;
         }
     }
+
     convertRC2Location(row,column){
         return (column - 1) + ((row-1)*3);
     }
+
     isValidSpot(location){
         if (this[location] === " "){
             return true;
@@ -36,7 +38,8 @@ class Board extends Array{
             return false;
         }
     }
-    place(player, location){       //method name, arguement, body, this is an instance method
+
+    placeToken(player, location){       //method name, arguement, body, this is an instance method
         if (player === 1){
             this[location] = this.token1;
         }
@@ -152,12 +155,12 @@ for (let i = 0; i < 9; i++){
                 this.style.backgroundColor = 'red';
                 if (turn%2 === 0){
                     this.innerHTML = "<p>O</p>"
-                    board.place(0,this.id)
+                    board.placeToken(0,this.id)
                     document.getElementById('status').innerHTML = "<p>Player X, it is your turn...</p>"
                 }
                 else{
                     this.innerHTML = "<p>X</p>"
-                    board.place(1,this.id)
+                    board.placeToken(1,this.id)
                     document.getElementById('status').innerHTML = "<p>Player O, it is your turn...</p>"
                 }
                 turn++;
@@ -245,10 +248,10 @@ reset.onclick = function() {
 //         }
 //         invalid = true;
 //         if (turnCount%2 === 0){
-//             board.place(1,location);
+//             board.placeToken(1,location);
 //         }
 //         else {
-//             board.place(2,location);
+//             board.placeToken(2,location);
 //         }
 //         if (turnCount === 9){
 //             break;
